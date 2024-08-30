@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton } from '@ionic/angular/standalone';
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
-export class Home2Page implements OnInit {
+export class Home2Page implements OnInit, AfterViewInit {
 
   value = "";
   keyboard!: Keyboard;
@@ -25,6 +25,8 @@ export class Home2Page implements OnInit {
   }
 
   ngAfterViewInit() {
+    console.log("here");
+
     this.keyboard = new Keyboard({
       onChange: input => this.onChange(input),
       onKeyPress: button => this.onKeyPress(button)

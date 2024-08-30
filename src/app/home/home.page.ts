@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/angular/standalone';
 import Keyboard from "simple-keyboard";
@@ -10,21 +10,32 @@ import Keyboard from "simple-keyboard";
   standalone: true,
   imports: [IonButton, IonHeader, IonToolbar, IonTitle, IonContent],
 })
-export class HomePage {
+export class HomePage implements OnDestroy {
 
 
   value = "";
   keyboard!: Keyboard;
 
+
   constructor(private router : Router){
 
   }
+
+  ngOnInit(){
+    console.log("ON INIT");
+
+    window.onbeforeunload = () => this.ngOnDestroy();
+
+  }
+
 
   ngAfterViewInit() {
     this.keyboard = new Keyboard({
       onChange: input => this.onChange(input),
       onKeyPress: button => this.onKeyPress(button)
     });
+
+
   }
 
   onChange = (input: string) => {
@@ -55,9 +66,14 @@ export class HomePage {
   };
 
   go(){
-    this.router.navigate(['/home2'])
+    this.router.navigateByUrl('/home2')
   }
-  ionViewDidLeave(){
-    this.keyboard.destroy();
+
+
+  ngOnDestroy(): void {
+    console.log("DESTROY");
+
+    this.keyboard?.destroy();
   }
+
 }
