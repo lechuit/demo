@@ -1,22 +1,26 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/angular/standalone';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton } from '@ionic/angular/standalone';
 import Keyboard from "simple-keyboard";
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-home2',
+  templateUrl: './home2.page.html',
+  styleUrls: ['./home2.page.scss'],
   standalone: true,
-  imports: [IonButton, IonHeader, IonToolbar, IonTitle, IonContent],
+  imports: [IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
-export class HomePage {
-
+export class Home2Page implements OnInit {
 
   value = "";
   keyboard!: Keyboard;
 
   constructor(private router : Router){
+
+  }
+  ngOnInit(): void {
 
   }
 
@@ -54,10 +58,4 @@ export class HomePage {
     });
   };
 
-  go(){
-    this.router.navigate(['/home2'])
-  }
-  ionViewDidLeave(){
-    this.keyboard.destroy();
-  }
 }
